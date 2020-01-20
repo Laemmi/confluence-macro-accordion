@@ -1,0 +1,18 @@
+## Macro title: laemmi-confluence-macro-accordion-item
+## Macro has a body: Y
+## Body processing: Rendered
+## Output: XHTML
+##
+## Developed by: laemmi <laemmi@spacerabbit.de>
+## Date created: 15/01/2020
+##
+## @param Expanded:title=Expanded|type=boolean|default=false|desc=Check this box if you want the initial state to be expanded
+## @param Title:title=Title|type=string|required=true|desc=Titel des Panels
+
+#set($id = 'Id_' + $action.dateFormatter.calendar.timeInMillis)
+
+<div class="laemmi-confluence-macro-accordion-item">
+    <input type="radio" name="laemmi-confluence-macro-accordion" id="$id"#if($paramExpanded == true) checked#end>
+    <label for="$id"><h2>$paramTitle</h2></label>
+    <div class="laemmi-confluence-macro-accordion-panel">$body</div>
+</div>

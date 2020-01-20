@@ -1,0 +1,94 @@
+## Macro title: laemmi-confluence-macro-accordion
+## Macro has a body: Y
+## Body processing: Rendered
+## Output: XHTML
+##
+## Developed by: laemmi <laemmi@spacerabbit.de>
+## Date created: 15/01/2020
+##
+## @noparams
+
+<style>
+@media all {
+    .laemmi-confluence-macro-accordion .laemmi-confluence-macro-accordion-item input {
+        display: none;
+    }
+}
+
+@media screen {
+    .laemmi-confluence-macro-accordion {
+        margin: auto;
+    }
+
+    .laemmi-confluence-macro-accordion .laemmi-confluence-macro-accordion-panel {
+        height: 0;
+        padding: 0 1em;
+        margin: 0 auto;
+        box-sizing: border-box;
+        overflow: hidden;
+        transition: height 0.5s ease-out;
+    }
+
+    .laemmi-confluence-macro-accordion .laemmi-confluence-macro-accordion-item input:checked~.laemmi-confluence-macro-accordion-panel {
+        height: auto;
+        padding: 0.5em 1em;
+        border: 1px solid rgba(205,41,140,1);
+    }
+
+    .laemmi-confluence-macro-accordion .laemmi-confluence-macro-accordion-item label {
+        cursor: pointer;
+        background-color: rgba(244,147,37,1);
+        display: block;
+        padding: 1em;
+        margin-bottom: 1px;
+        width: 100%;
+        box-sizing: border-box;
+        z-index: 100;
+        transition: background-color 0.5s ease-out;
+    }
+
+    .laemmi-confluence-macro-accordion .laemmi-confluence-macro-accordion-item label h2 {
+        display: inline;
+        margin: 0;
+        font-size: 1rem;
+        color: #fff;
+        font-weight: 400;
+    }
+
+    .laemmi-confluence-macro-accordion .laemmi-confluence-macro-accordion-item input:checked+label {
+        background-color: rgba(205,41,140,1);
+        margin-bottom: 0;
+    }
+
+    .laemmi-confluence-macro-accordion .laemmi-confluence-macro-accordion-item label:after {
+        content: ' + ';
+        color: white;
+        float: right;
+    }
+
+    .laemmi-confluence-macro-accordion .laemmi-confluence-macro-accordion-item input:checked+label:after {
+        content: ' – ';
+    }
+}
+</style>
+<div class="laemmi-confluence-macro-accordion">$body</div>
+<script>
+    (function () {
+        var resetHeight = function () {
+            var x, i;
+            x = document.querySelectorAll('.laemmi-confluence-macro-accordion-item .laemmi-confluence-macro-accordion-panel');
+            for (i = 0; i < x.length; i++) {
+                x[i].style.height = '0px';
+            }
+        }
+        var x, i;
+        x = document.querySelectorAll('.laemmi-confluence-macro-accordion-item input');
+        for (i = 0; i < x.length; i++) {
+            x[i].addEventListener('click', function() {
+                var p = this.nextElementSibling.nextElementSibling;
+                resetHeight();
+                p.style.height = p.scrollHeight + 'px';
+            });
+        }
+    })();
+</script>
